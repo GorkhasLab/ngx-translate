@@ -3,10 +3,11 @@ import {NgModule} from '@angular/core';
 
 
 import {AppComponent} from './app.component';
-import {buildNgxTranslationProvider, NgxTranslateModule, NgxTranslateService} from '../../target';
+import {NgxTranslateModule, NgxTranslateService} from '../../target';
 import {TranslateModule} from '@ngx-translate/core';
 import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
 import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
 
 
 @NgModule({
@@ -15,22 +16,22 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    TranslateModule,
     HttpClientModule,
+    AppRoutingModule,
     LoggerModule.forRoot({
       serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.OFF
     }),
-    NgxTranslateModule
+    TranslateModule,
+    NgxTranslateModule.forRoot({
+      name: 'pages', source: '/assets/demo'
+    })
   ],
-  providers: [
-    buildNgxTranslationProvider('demo', 'assets/demo/'),
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
   constructor(private ngxTranslateService: NgxTranslateService) {
     this.ngxTranslateService.useLang('en');
   }

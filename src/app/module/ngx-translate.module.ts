@@ -1,14 +1,13 @@
 import {CommonModule} from '@angular/common';
-import {NgModule, Optional, Provider, SkipSelf} from '@angular/core';
+import {ModuleWithProviders, NgModule, Optional, Provider, SkipSelf} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 
-import {NgxTranslateService, TRANSLATION_PROVIDER} from './service/ngx-tranlsate.service';
+import {NgxTranslateService, TRANSLATION_PROVIDER, TranslationProvider} from './service/ngx-tranlsate.service';
 import {LanguageSwitcherComponent} from './components/language-switcher/language-switcher.component';
 import {NgxTranslateLoader} from './service/ngx-translate-loader.service';
 import {LoggerModule, NGXLogger} from 'ngx-logger';
-import {throwIfAlreadyLoaded} from './module-import-guard';
 
 export function ngxTranslateModuleComponents() {
   return [LanguageSwitcherComponent];
@@ -55,8 +54,22 @@ export function buildNgxTranslationProvider(name: string, source: string): Provi
   providers: [...ngxTranslateModuleProviders()]
 })
 export class NgxTranslateModule {
-  constructor(@Optional() @SkipSelf() parentModule: NgxTranslateModule) {
-    throwIfAlreadyLoaded(parentModule, 'NgxTranslateModule');
+  private static ngxTranslationService;
+
+  constructor(@Optional() @SkipSelf() parentModule: NgxTranslateModule,
+              private ngxTranslationService: NgxTranslateService) {
+    // throwIfAlreadyLoaded(parentModule, 'NgxTranslateModule');
+    NgxTranslateModule.ngxTranslationService = this.ngxTranslationService;
+  }
+
+  static forRoot(config?: TranslationProvider): ModuleWithProviders {
+    if (NgxTranslateModule.ngxTranslationService) {
+      NgxTranslateModule.ngxTranslationService.addTranslationFolder(config.name, config.source);
+    }
+    return {
+      ngModule: NgxTranslateModule,
+      providers: [...ngxTranslateModuleProviders(), buildNgxTranslationProvider(config.name, config.source)]
+    };
   }
 }
 
