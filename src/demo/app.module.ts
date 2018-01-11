@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 
 import {AppComponent} from './app.component';
-import {NgxTranslateModule, NgxTranslateService} from '../../target';
+import {NgxTranslateModule} from '../../target';
 import {TranslateModule} from '@ngx-translate/core';
 import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
 import {HttpClientModule} from '@angular/common/http';
@@ -32,7 +32,4 @@ import {AppRoutingModule} from './app-routing.module';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private ngxTranslateService: NgxTranslateService) {
-    this.ngxTranslateService.useLang('en');
-  }
 }
