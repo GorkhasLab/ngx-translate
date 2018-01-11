@@ -1,19 +1,19 @@
 <p align="center">
-  <img height="256px" width="256px" style="text-align: center;" src="https://cdn.rawgit.com/GorkhasLab/ngx-translate/master/demo/src/assets/logo.svg">
+  <img height="256px" width="256px" style="text-align: center;" src="https://cdn.rawgit.com/GorkhasLab/gorkhas-ngx-translate/master/demo/src/assets/logo.svg">
 </p>
 
-# ngx-translate - Ngx Translate
+# gorkhas-ngx-translate - Ngx Translate
 
-[![npm version](https://badge.fury.io/js/ngx-translate.svg)](https://badge.fury.io/js/ngx-translate),
-[![Build Status](https://travis-ci.org/GorkhasLab/ngx-translate.svg?branch=master)](https://travis-ci.org/GorkhasLab/ngx-translate)
-[![Coverage Status](https://coveralls.io/repos/github/GorkhasLab/ngx-translate/badge.svg?branch=master)](https://coveralls.io/github/GorkhasLab/ngx-translate?branch=master)
-[![dependency Status](https://david-dm.org/GorkhasLab/ngx-translate/status.svg)](https://david-dm.org/GorkhasLab/ngx-translate)
-[![devDependency Status](https://david-dm.org/GorkhasLab/ngx-translate/dev-status.svg?branch=master)](https://david-dm.org/GorkhasLab/ngx-translate#info=devDependencies)
-[![Greenkeeper Badge](https://badges.greenkeeper.io/GorkhasLab/ngx-translate.svg)](https://greenkeeper.io/)
+[![npm version](https://badge.fury.io/js/gorkhas-ngx-translate.svg)](https://badge.fury.io/js/gorkhas-ngx-translate),
+[![Build Status](https://travis-ci.org/GorkhasLab/gorkhas-ngx-translate.svg?branch=master)](https://travis-ci.org/GorkhasLab/gorkhas-ngx-translate)
+[![Coverage Status](https://coveralls.io/repos/github/GorkhasLab/gorkhas-ngx-translate/badge.svg?branch=master)](https://coveralls.io/github/GorkhasLab/gorkhas-ngx-translate?branch=master)
+[![dependency Status](https://david-dm.org/GorkhasLab/gorkhas-ngx-translate/status.svg)](https://david-dm.org/GorkhasLab/gorkhas-ngx-translate)
+[![devDependency Status](https://david-dm.org/GorkhasLab/gorkhas-ngx-translate/dev-status.svg?branch=master)](https://david-dm.org/GorkhasLab/gorkhas-ngx-translate#info=devDependencies)
+[![Greenkeeper Badge](https://badges.greenkeeper.io/GorkhasLab/gorkhas-ngx-translate.svg)](https://greenkeeper.io/)
 
 ## Demo
 
-View all the directives in action at https://GorkhasLab.github.io/ngx-translate
+View all the directives in action at https://GorkhasLab.github.io/gorkhas-ngx-translate
 
 ## Dependencies
 * [Angular](https://angular.io) (*requires* Angular 2 or higher, tested with 2.0.0)
@@ -21,34 +21,38 @@ View all the directives in action at https://GorkhasLab.github.io/ngx-translate
 ## Installation
 Install above dependencies via *npm*. 
 
-Now install `ngx-translate` via:
+Now install `gorkhas-gorkhas-ngx-translate` via:
 ```shell
-npm install --save ngx-translate
+npm install --save gorkhas-ngx-translate
 ```
-
----
-##### SystemJS
->**Note**:If you are using `SystemJS`, you should adjust your configuration to point to the UMD bundle.
-In your systemjs config file, `map` needs to tell the System loader where to look for `ngx-translate`:
-```js
-map: {
-  'ngx-translate': 'node_modules/ngx-translate/bundles/ngx-translate.umd.js',
-}
-```
----
 
 Once installed you need to import the main module:
 ```js
-import { LibModule } from 'ngx-translate';
+import { NgxTranslateModule } from 'gorkhas-ngx-translate';
 ```
 The only remaining part is to list the imported module in your application module. The exact method will be slightly
-different for the root (top-level) module for which you should end up with the code similar to (notice ` LibModule .forRoot()`):
+different for the root (top-level) module for which you should end up with the code similar to (notice `NgxTranslateModule.forRoot()`):
 ```js
-import { LibModule } from 'ngx-translate';
+import { NgxTranslateModule } from 'gorkhas-ngx-translate';
+import {TranslateModule} from '@ngx-translate/core';
+import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, ...],
-  imports: [LibModule.forRoot(), ...],  
+  imports: [
+    HttpClientModule,
+    LoggerModule.forRoot({
+      serverLoggingUrl: '/api/logs',
+      level: NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.OFF
+    }),
+    TranslateModule,
+    NgxTranslateModule.forRoot({
+      name: 'pages', source: '/assets/demo'
+    })
+    , ...
+  ],  
   bootstrap: [AppComponent]
 })
 export class AppModule {
@@ -58,18 +62,24 @@ export class AppModule {
 Other modules in your application can simply import ` LibModule `:
 
 ```js
-import { LibModule } from 'ngx-translate';
+import { NgxTranslateModule } from 'gorkhas-ngx-translate';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [OtherComponent, ...],
-  imports: [LibModule, ...], 
+  imports: [
+        TranslateModule,
+        NgxTranslateModule.forRoot({
+          name: 'pages', source: '/assets/pages'
+        })
+    , ...], 
 })
 export class OtherModule {
 }
 ```
 
 ## Usage
-
+More detail https://github.com/GorkhasLab/ngx-translate/tree/master/src/demo
 
 
 ## License

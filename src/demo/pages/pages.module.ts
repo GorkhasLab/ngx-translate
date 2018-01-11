@@ -9,8 +9,8 @@ import {NgxTranslateModule} from '../../../target';
 @NgModule({
   imports: [
     CommonModule,
-    TranslateModule,
     PagesRoutingModule,
+    TranslateModule,
     NgxTranslateModule.forRoot({
       name: 'pages', source: '/assets/pages'
     })
