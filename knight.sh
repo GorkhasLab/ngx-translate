@@ -2,7 +2,7 @@
 # Bash Menu Script Example
 
 PS3='Please enter your choice: '
-options=("Normal Build" "Normal build and publish" "Run App" "Run Test" "Quit")
+options=("Normal Build" "Normal build and publish" "Run App" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -16,15 +16,12 @@ do
             read newVersion
             sed -i -E "s/\"version\":.*[^,]/\"version\":\"${newVersion}\"/g" package.json
             sed -i -E "s/\"version\":.*[^,]/\"version\":\"${newVersion}\"/g" src/app/package.json
+            sed -i -E "s/\"version\":.*[^,]/\"version\":\"${newVersion}\"/g" src/app/ng-package.json
             npm run build && cd dist/lib && yarn publish && cd ../../
             ;;
         "Run App")
             echo "you chose 'Run App'"
             npm run start
-            ;;
-        "Run Test")
-            echo "you chose 'Run Test'"
-            npm run test
             ;;
         "Quit")
             break
