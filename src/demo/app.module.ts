@@ -25,7 +25,7 @@ import {AppRoutingModule} from './app-routing.module';
     }),
     TranslateModule,
     NgxTranslateModule.forRoot({
-      name: 'pages', source: '/assets/demo'
+      name: 'demo', source: '/assets/demo'
     })
   ],
   providers: [],

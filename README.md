@@ -49,7 +49,7 @@ import {HttpClientModule} from '@angular/common/http';
     }),
     TranslateModule,
     NgxTranslateModule.forRoot({
-      name: 'pages', source: '/assets/demo'
+      name: 'demo', source: '/assets/demo'
     })
     , ...
   ],  
@@ -57,6 +57,15 @@ import {HttpClientModule} from '@angular/common/http';
 })
 export class AppModule {
 }
+```
+
+In this case i18n json must be placed inside 
+```yml
+assets
+  +demo/
+    +i18n/
+      - en.json
+      - np.json
 ```
 
 Other modules in your application can simply import ` LibModule `:
@@ -76,6 +85,14 @@ import {TranslateModule} from '@ngx-translate/core';
 })
 export class OtherModule {
 }
+```
+In this case i18n json must be placed inside 
+```yml
+assets/
+  +pages/
+    +i18n/
+      - en.json
+      - np.json
 ```
 
 ## Usage
