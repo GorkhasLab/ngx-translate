@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {ModuleWithProviders, NgModule, Provider} from '@angular/core';
+import {NgModule, Optional, Provider, SkipSelf} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -8,6 +8,7 @@ import {NgxTranslateService, TRANSLATION_PROVIDER} from './service/ngx-tranlsate
 import {LanguageSwitcherComponent} from './components/language-switcher/language-switcher.component';
 import {NgxTranslateLoader} from './service/ngx-translate-loader.service';
 import {LoggerModule, NGXLogger} from 'ngx-logger';
+import {throwIfAlreadyLoaded} from './module-import-guard';
 
 export function ngxTranslateModuleComponents() {
   return [LanguageSwitcherComponent];
@@ -39,7 +40,7 @@ export function buildNgxTranslationProvider(name: string, source: string): Provi
   imports: [
     CommonModule,
     HttpClientModule,
-    LoggerModule,
+    LoggerModule.forChild(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -49,17 +50,13 @@ export function buildNgxTranslationProvider(name: string, source: string): Provi
       isolate: true
     })
   ],
-  exports: [...ngxTranslateModuleComponents()],
-  declarations: [...ngxTranslateModuleComponents()]
+  exports: [...ngxTranslateModuleComponents(), TranslateModule],
+  declarations: [...ngxTranslateModuleComponents()],
+  providers: [...ngxTranslateModuleProviders()]
 })
 export class NgxTranslateModule {
-  static forRoot(config?: any): ModuleWithProviders {
-    return {
-      ngModule: NgxTranslateModule,
-      providers: [
-        ...ngxTranslateModuleProviders()
-      ]
-    };
+  constructor(@Optional() @SkipSelf() parentModule: NgxTranslateModule) {
+    throwIfAlreadyLoaded(parentModule, 'NgxTranslateModule');
   }
 }
 

@@ -1,5 +1,5 @@
 import {Language} from '../../models/language';
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgxTranslateService} from '../../service/ngx-tranlsate.service';
 
 @Component({
@@ -9,7 +9,7 @@ import {NgxTranslateService} from '../../service/ngx-tranlsate.service';
 })
 export class LanguageSwitcherComponent implements OnInit {
 
-  languages: Language[] = [{label: 'English', key: 'en'}, {label: 'Nepali', key: 'np'}];
+  @Input() languages: Language[] = [{label: 'English', key: 'en'}, {label: 'Nepali', key: 'np'}];
 
   constructor(private ngxTranslationService: NgxTranslateService) {
   }
