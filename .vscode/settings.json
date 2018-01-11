@@ -1,0 +1,13 @@
+{
+      // Controls the font size in pixels.
+    "editor.fontSize": 16,
+    // Controls the font family.
+    "editor.fontFamily": "'Consolas'",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorTheme": "Visual Studio Dark",
+    "vsicons.projectDetection.autoReload": true,
+    "editor.formatOnType": false,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "files.autoSave": "onWindowChange"
+}
