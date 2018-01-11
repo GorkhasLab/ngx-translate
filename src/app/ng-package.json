@@ -1,0 +1,6 @@
+{
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "name": "gorkhas-ngx-translate",
+  "version": "0.0.0-alpha.1",
+  "dest": "../../dist/lib"
+}
