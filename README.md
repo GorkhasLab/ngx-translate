@@ -13,7 +13,7 @@
 
 ## Demo
 
-View all the directives in action at https://GorkhasLab.github.io/gorkhas-ngx-translate
+View all the directives in action at https://GorkhasLab.github.io/ngx-translate
 
 ## Dependencies
 * [Angular](https://angular.io) (*requires* Angular 2 or higher, tested with 2.0.0)
