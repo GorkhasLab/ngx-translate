@@ -1,5 +1,10 @@
+---
 applications:
-  - name: gorkhas-beneficiary-ui
+  - name: gorkhas-ngx-translate
     random-route: true
-    buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+    buildpack: http://github.com/cloudfoundry/staticfile-buildpack.git
     path: dist/
+    memory: 64M
+    instances: 1
+    env:
+      REDIRECT_URL: http://hello.com/apicheck

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'gorkhas-kickstart',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KickstartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
 
+  fetch() {
+    this.http.get('/api/ok').subscribe(value => {
+      console.log(value);
+    });
+  }
 }
