@@ -1,9 +1,10 @@
 {
   "name": "gorkhas-ngx-translate",
-  "version":"0.0.0-alpha.1",
+  "version": "0.0.0-alpha.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
+    "build:prod": "./node_modules/.bin/ng build --prod --aot=false",
     "start": "ng serve",
     "build": "ng test --watch=false --code-coverage && npm run build:pack",
     "build:pack": "ng-packagr -p src/app/ng-package.json",

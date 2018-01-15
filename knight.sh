@@ -4,7 +4,7 @@ ROOT_DIR=$PWD
 DIST_DIR=target
 echo "Building From ${ROOT_DIR}"
 PS3='Please enter your choice: '
-options=("Normal Build" "Normal build and publish" "Run App" "Quit")
+options=("Normal Build" "Normal build and publish" "Run App" "Build and Deploy App in cf" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -25,6 +25,10 @@ do
             echo "you chose 'Run App'"
             npm run start
             ;;
+        "Build and Deploy App in cf")
+            echo "you chose 'Build and Deploy App in cf'"
+            npm run build:prod && ./cf-deploy.sh
+            ;;    
         "Quit")
             break
             ;;
